@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Steering Wheel Pad — PC Receiver Downloads</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        glass: {
+                            100: 'rgba(255, 255, 255, 0.05)',
+                            200: 'rgba(255, 255, 255, 0.1)',
+                            300: 'rgba(255, 255, 255, 0.15)',
+                            border: 'rgba(255, 255, 255, 0.18)',
+                        },
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 4s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-12px)' },
+                        },
+                        glow: {
+                            '0%': { opacity: 0.4, transform: 'scale(1)' },
+                            '100%': { opacity: 0.8, transform: 'scale(1.05)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #030712;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+
+        .mesh-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 15% 20%, rgba(99, 102, 241, 0.22) 0%, transparent 40%),
+                radial-gradient(circle at 85% 80%, rgba(168, 85, 247, 0.22) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.18) 0%, transparent 50%),
+                #030712;
+        }
+
+        .liquid-glass {
+            background: rgba(18, 24, 38, 0.55);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .liquid-glass-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .liquid-glass-hover:hover {
+            background: rgba(24, 32, 52, 0.7);
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 12px 40px 0 rgba(99, 102, 241, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .glow-button {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            transition: all 0.3s ease;
+        }
+        .glow-button::after {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: linear-gradient(60deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg) translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+        .glow-button:hover::after {
+            transform: rotate(45deg) translateX(100%);
+        }
+        .glow-button:hover {
+            box-shadow: 0 0 25px rgba(168, 85, 247, 0.6);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="selection:bg-indigo-500 selection:text-white">
+
+    <div class="mesh-bg"></div>
+
+    <!-- Navigation Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 px-4 sm:px-8 py-4">
+        <div class="max-w-7xl mx-auto liquid-glass rounded-2xl px-6 py-3 flex items-center justify-between">
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/30 group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-gamepad text-white text-xl"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-bold text-lg tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-indigo-300">VSW Pad</span>
+                    <span class="text-[10px] text-indigo-400 font-medium tracking-wider uppercase">Virtual Steering</span>
+                </div>
+            </a>
+            
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-300">
+                <a href="#features" class="hover:text-indigo-400 transition-colors">Features</a>
+                <a href="#downloads" class="hover:text-indigo-400 transition-colors">Downloads</a>
+                <a href="#compatibility" class="hover:text-indigo-400 transition-colors">Compatibility</a>
+                <a href="#docs" class="hover:text-indigo-400 transition-colors">Documentation</a>
+                <a href="#faq" class="hover:text-indigo-400 transition-colors">FAQ</a>
+            </nav>
+
+            <div class="flex items-center space-x-4">
+                <a href="#downloads" class="hidden sm:inline-flex items-center space-x-2 px-4 py-2 rounded-xl text-sm font-medium bg-white/10 hover:bg-white/20 border border-white/10 transition-all">
+                    <i class="fa-solid fa-file-zipper text-indigo-400"></i>
+                    <span>Get Portable ZIP</span>
+                </a>
+                <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white text-xl p-2">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu" class="hidden max-w-7xl mx-auto mt-2 liquid-glass rounded-2xl p-4 flex flex-col space-y-3 md:hidden">
+            <a href="#features" class="text-gray-300 hover:text-white py-2 px-3 rounded-lg hover:bg-white/5">Features</a>
+            <a href="#downloads" class="text-gray-300 hover:text-white py-2 px-3 rounded-lg hover:bg-white/5">Downloads</a>
+            <a href="#compatibility" class="text-gray-300 hover:text-white py-2 px-3 rounded-lg hover:bg-white/5">Compatibility</a>
+            <a href="#docs" class="text-gray-300 hover:text-white py-2 px-3 rounded-lg hover:bg-white/5">Documentation</a>
+            <a href="#faq" class="text-gray-300 hover:text-white py-2 px-3 rounded-lg hover:bg-white/5">FAQ</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 md:pt-40 md:pb-32 px-4 sm:px-8">
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 md:w-96 md:h-96 bg-indigo-600/30 rounded-full blur-[120px] pointer-events-none animate-glow"></div>
+        <div class="absolute top-1/3 left-1/4 w-64 h-64 bg-purple-600/20 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-6xl mx-auto text-center relative z-10">
+            <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full liquid-glass border border-indigo-500/30 text-indigo-300 text-xs md:text-sm font-medium mb-8 animate-float shadow-lg shadow-indigo-500/10">
+                <span class="flex h-2 w-2 rounded-full bg-indigo-400 animate-ping"></span>
+                <span>VSW Portable Receiver v1.0 — Ready</span>
+                <i class="fa-solid fa-arrow-right text-[10px] ml-1"></i>
+            </div>
+
+            <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight mb-6 leading-tight">
+                Transform Your Device Into a <br class="hidden sm:inline" />
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-300 to-pink-400">Pro Virtual Steering Wheel</span>
+            </h1>
+
+            <p class="max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-gray-300 mb-10 leading-relaxed font-normal">
+                No installation required. Extract the portable ZIP package, run the receiver directly on your PC, and connect your phone for ultra-responsive low-latency driving simulation control.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+                <a href="downloads/VSW-Windows-Receiver-Portable-v1.0.zip" download class="w-full sm:w-auto glow-button text-white font-semibold px-8 py-4 rounded-2xl shadow-xl flex items-center justify-center space-x-3 text-base">
+                    <i class="fa-solid fa-file-zipper text-xl"></i>
+                    <span>Download Receiver Package (.zip)</span>
+                </a>
+                <a href="#features" class="w-full sm:w-auto liquid-glass liquid-glass-hover text-gray-200 font-semibold px-8 py-4 rounded-2xl flex items-center justify-center space-x-2 text-base">
+                    <i class="fa-solid fa-play text-xs text-indigo-400"></i>
+                    <span>Explore Features</span>
+                </a>
+            </div>
+
+            <!-- Interactive HUD Graphic -->
+            <div class="relative max-w-4xl mx-auto liquid-glass rounded-3xl p-4 md:p-6 shadow-2xl border border-white/10 group">
+                <div class="absolute inset-0 bg-gradient-to-tr from-indigo-500/10 to-purple-500/10 rounded-3xl pointer-events-none"></div>
+                <div class="relative rounded-2xl overflow-hidden bg-gray-900/80 border border-white/5 aspect-video flex items-center justify-center">
+                    <div class="absolute inset-0 flex flex-col items-center justify-center p-6 bg-gradient-to-b from-transparent via-gray-950/60 to-gray-950">
+                        <div class="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-indigo-500/40 border-t-indigo-400 flex items-center justify-center animate-spin-slow mb-4 shadow-2xl shadow-indigo-500/30">
+                            <i class="fa-solid fa-gauge-high text-4xl md:text-5xl text-indigo-300"></i>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-bold text-white tracking-wide">VSW Pad Control Bridge</h3>
+                        <p class="text-sm text-gray-400 mt-1">Status: Receiver Standalone / Portable Mode</p>
+                        <div class="flex items-center space-x-3 mt-4">
+                            <span class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-semibold border border-emerald-500/30 flex items-center space-x-1">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                                <span>Local Wi-Fi / USB Ready</span>
+                            </span>
+                            <span class="px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 text-xs font-semibold border border-indigo-500/30">
+                                Portable DirectInput
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="downloads" class="py-20 px-4 sm:px-8 relative">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
+                    Get the Receiver App
+                </h2>
+                <p class="text-gray-400 max-w-xl mx-auto text-sm sm:text-base">
+                    Download the portable ZIP build to link your smartphone with your driving simulation titles on PC.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+                
+                <!-- Windows Portable Receiver Card -->
+                <div class="liquid-glass liquid-glass-hover rounded-3xl p-8 flex flex-col justify-between relative overflow-hidden group">
+                    <div class="absolute -top-24 -right-24 w-48 h-48 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none group-hover:bg-indigo-500/30 transition-all"></div>
+                    
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-500/30 to-purple-600/30 border border-indigo-500/40 flex items-center justify-center text-indigo-300 shadow-lg">
+                                <i class="fa-solid fa-file-zipper text-3xl"></i>
+                            </div>
+                            <span class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold border border-emerald-500/30">
+                                Portable Release
+                            </span>
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-white mb-2">Windows Portable Receiver</h3>
+                        <p class="text-gray-300 text-sm mb-6 leading-relaxed">
+                            Standalone ZIP archive with no installation needed. Extract to any folder and run the executable directly. Includes built-in network connection listeners and input mapping options.
+                        </p>
+
+                        <ul class="space-y-3 mb-8 text-sm text-gray-300">
+                            <li class="flex items-center space-x-3">
+                                <i class="fa-solid fa-circle-check text-indigo-400"></i>
+                                <span>Zero installation / Standalone portable ZIP</span>
+                            </li>
+                            <li class="flex items-center space-x-3">
+                                <i class="fa-solid fa-circle-check text-indigo-400"></i>
+                                <span>Virtual controller mapping support via ViGEmBus driver</span>
+                            </li>
+                            <li class="flex items-center space-x-3">
+                                <i class="fa-solid fa-circle-check text-indigo-400"></i>
+                                <span>Automatic local network phone discovery & manual IP sync</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <a href="downloads/VSW-Windows-Receiver-Portable-v1.0.zip" download class="w-full glow-button text-white font-semibold py-4 px-6 rounded-2xl flex items-center justify-center space-x-3 shadow-lg transition-all">
+                            <i class="fa-solid fa-download text-lg"></i>
+                            <span>Download Portable ZIP (.zip)</span>
+                        </a>
+                        <div class="flex items-center justify-between mt-3 text-xs text-gray-400 px-1">
+                            <span>Package: VSW-Windows-Receiver-Portable-v1.0.zip</span>
+                            <span>v1.0 Standalone</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TV Receiver Card -->
+                <div class="liquid-glass rounded-3xl p-8 flex flex-col justify-between relative overflow-hidden opacity-75 border-dashed border-gray-700">
+                    <div class="absolute inset-0 bg-gray-950/40 backdrop-blur-[2px] pointer-events-none"></div>
+                    
+                    <div class="relative z-10">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="w-16 h-16 rounded-2xl bg-gray-800/80 border border-gray-700 flex items-center justify-center text-gray-500 shadow-lg">
+                                <i class="fa-solid fa-tv text-3xl"></i>
+                            </div>
+                            <span class="px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 text-xs font-bold border border-amber-500/20 flex items-center space-x-1.5">
+                                <i class="fa-solid fa-clock text-[10px]"></i>
+                                <span>Not supported</span>
+                            </span>
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-gray-300 mb-2">Smart TV Receiver</h3>
+                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                            No standalone receiver for Android TV or Google TV is currently available. The PC receiver is tailored specifically for Windows desktop gaming setups.
+                        </p>
+
+                        <ul class="space-y-3 mb-8 text-sm text-gray-500">
+                            <li class="flex items-center space-x-3">
+                                <i class="fa-solid fa-lock text-gray-600"></i>
+                                <span>TV receiver build unavailable</span>
+                            </li>
+                            <li class="flex items-center space-x-3">
+                                <i class="fa-solid fa-lock text-gray-600"></i>
+                                <span>No direct Smart TV APK provided</span>
+                            </li>
+                            <li class="flex items-center space-x-3">
+                                <i class="fa-solid fa-lock text-gray-600"></i>
+                                <span>Use the PC Portable Receiver package</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="relative z-10">
+                        <button disabled class="w-full bg-gray-800/50 text-gray-500 font-semibold py-4 px-6 rounded-2xl flex items-center justify-center space-x-3 border border-gray-700/50 cursor-not-allowed">
+                            <i class="fa-solid fa-ban text-lg"></i>
+                            <span>Not available</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 px-4 sm:px-8 relative">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
+                    Engineered for Sim Racing Precision
+                </h2>
+                <p class="text-gray-400 max-w-xl mx-auto text-sm sm:text-base">
+                    Build a complete simulation wheel layout directly on your smartphone.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="liquid-glass liquid-glass-hover rounded-3xl p-8 flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400 text-2xl mb-6 shadow-lg">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Native Low-Latency Streaming</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed">
+                            Written with native C++ NDK sensor modules to ensure rapid transmission of accelerometer and gyroscope rotation over local Wi-Fi or USB tethering.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-xs text-indigo-400 font-semibold">
+                        <span>Low Latency Socket Pipeline</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+
+                <div class="liquid-glass liquid-glass-hover rounded-3xl p-8 flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-purple-400 text-2xl mb-6 shadow-lg">
+                            <i class="fa-solid fa-sliders"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Custom Cockpit Controls</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed">
+                            Set up touch buttons, gear shifters, handbrake controls, and customizable steering sensitivity profiles to match your preferences.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-xs text-purple-400 font-semibold">
+                        <span>Customizable Layouts</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+
+                <div class="liquid-glass liquid-glass-hover rounded-3xl p-8 flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-pink-500/20 border border-pink-500/30 flex items-center justify-center text-pink-400 text-2xl mb-6 shadow-lg">
+                            <i class="fa-solid fa-truck-fast"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Euro Truck Simulator Sync</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed">
+                            Tailored specifically for driving simulators like Euro Truck Simulator 2 and American Truck Simulator, providing responsive steering and auxiliary button mapping.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-xs text-pink-400 font-semibold">
+                        <span>Sim Integration Ready</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Compatibility Matrix -->
+    <section id="compatibility" class="py-20 px-4 sm:px-8 relative">
+        <div class="max-w-5xl mx-auto liquid-glass rounded-3xl p-8 md:p-12 relative overflow-hidden border border-white/10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                <div>
+                    <span class="text-indigo-400 text-xs font-bold uppercase tracking-widest block mb-2">Flexible DirectInput</span>
+                    <h2 class="text-3xl font-bold text-white mb-4">Compatible Sim Titles</h2>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-6">
+                        Exposes a virtual Xbox/DirectInput controller when coupled with ViGEmBus, making it compatible with popular PC titles.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex items-center space-x-3 text-sm text-gray-200">
+                            <i class="fa-solid fa-check text-indigo-400"></i>
+                            <span>Euro Truck Simulator 2</span>
+                        </div>
+                        <div class="flex items-center space-x-3 text-sm text-gray-200">
+                            <i class="fa-solid fa-check text-indigo-400"></i>
+                            <span>American Truck Simulator</span>
+                        </div>
+                        <div class="flex items-center space-x-3 text-sm text-gray-200">
+                            <i class="fa-solid fa-check text-indigo-400"></i>
+                            <span>Assetto Corsa</span>
+                        </div>
+                        <div class="flex items-center space-x-3 text-sm text-gray-200">
+                            <i class="fa-solid fa-check text-indigo-400"></i>
+                            <span>Forza Horizon 5</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-900/60 rounded-2xl p-6 border border-white/5">
+                    <h3 class="text-lg font-bold text-white mb-4 flex items-center space-x-2">
+                        <i class="fa-solid fa-microchip text-indigo-400"></i>
+                        <span>System Requirements</span>
+                    </h3>
+                    <ul class="space-y-4 text-sm text-gray-300">
+                        <li class="flex justify-between items-center pb-3 border-b border-white/5">
+                            <span class="text-gray-400">Operating System</span>
+                            <span class="font-medium text-white">Windows 10 / 11 (64-bit)</span>
+                        </li>
+                        <li class="flex justify-between items-center pb-3 border-b border-white/5">
+                            <span class="text-gray-400">Requirement</span>
+                            <span class="font-medium text-white">Extract ZIP package</span>
+                        </li>
+                        <li class="flex justify-between items-center pb-3 border-b border-white/5">
+                            <span class="text-gray-400">Connection</span>
+                            <span class="font-medium text-white">Local Wi-Fi or USB Tethering</span>
+                        </li>
+                        <li class="flex justify-between items-center">
+                            <span class="text-gray-400">Virtual Driver</span>
+                            <span class="font-medium text-white">ViGEmBus (recommended)</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Start Documentation -->
+    <section id="docs" class="py-16 px-4 sm:px-8">
+        <div class="max-w-5xl mx-auto liquid-glass rounded-3xl p-8 md:p-10">
+            <span class="text-indigo-300 text-xs font-bold uppercase tracking-widest">Setup Guide</span>
+            <h2 class="text-2xl sm:text-3xl font-bold text-white mt-2 mb-6">How to setup the Portable ZIP</h2>
+            <ol class="space-y-4 text-sm text-gray-300 list-decimal list-inside leading-relaxed">
+                <li>Download <strong class="text-white">VSW-Windows-Receiver-Portable-v1.0.zip</strong> using the primary download button above.</li>
+                <li>Right-click the downloaded `.zip` file and select <strong class="text-white">Extract All...</strong> to unpack it into a folder of your choice.</li>
+                <li>Open the extracted folder and run the receiver executable file.</li>
+                <li>Ensure both your phone and PC are connected to the same local Wi-Fi network (or linked via USB Tethering).</li>
+                <li>Open your game's controls menu and assign the mapped VSW inputs to your steering, throttle, and braking axes.</li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- FAQ Accordion Section -->
+    <section id="faq" class="py-16 px-4 sm:px-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-white mb-2">Frequently Asked Questions</h2>
+                <p class="text-gray-400 text-sm">Quick answers regarding portable setup and usage</p>
+            </div>
+
+            <div class="space-y-4">
+                <div class="liquid-glass rounded-2xl overflow-hidden border border-white/10">
+                    <button class="faq-toggle w-full text-left px-6 py-4 flex justify-between items-center text-white font-medium focus:outline-none">
+                        <span>Why use the Portable ZIP instead of an installer?</span>
+                        <i class="fa-solid fa-chevron-down text-indigo-400 transition-transform"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-4 text-sm text-gray-300 leading-relaxed">
+                        The portable ZIP runs completely standalone without registering registry keys or modifying system folders. It allows
